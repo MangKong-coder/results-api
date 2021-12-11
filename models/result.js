@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const resultSchema = new Schema({
     test: {
         type: String,
-        required: True
+        required: true
     },
     accessionNumber: {
         type: String,
@@ -22,7 +22,7 @@ const resultSchema = new Schema({
         type: Date,
         required: true
     },
-    result: {
+    output: {
         type: String,
         required: true
     }
