@@ -19,7 +19,7 @@ app.use(cors());
 // })
 
 app.get('/', (req, res, next) => {
-    res.send('<h1>This is an API used for Antigen and Antibody results</h1><p>Go to route /result/results to see all of the results</p>')
+    res.send('<h1>This is an API used for Antigen and Antibody results</h1><p>Go to route /result/results to see all of the results</p> <footer> <small>&copy; Copyright 2021, James Domingo. All Rights Reserved</small> </footer>')
 })
 
 app.use('/result', resultRouter)
