@@ -40,10 +40,39 @@ exports.postResult = async (req, res, next) => {
 
 exports.getResult = async (req, res, next) => {
     try {
-        const accessionNumber = req.params.accessionNumber;
-        const result = await Result.find({accessionNumber: accessionNumber});
+        const resultId = req.params.resultId;
+        const result = await Result.findById(resultId);
         res.status(200).json({
             result: result
+        })
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+exports.updateResult = async (req, res, next) => {
+    const resultId = req.params.resultId
+    try {
+        const test = req.body.test;
+        const accessionNumber = req.body.accessionNumber;
+        const fullName = req.body.fullName;
+        const dateOfCollection = req.body.dateOfCollection;
+        const dateOfRelease = req.body.dateOfRelease;
+        const output = req.body.output
+        const result  = await Result.findById(resultId)
+        if (!result) {
+            throw new Error('Result not found')
+        }
+        result.test = test
+        result.accessionNumber = accessionNumber
+        result.fullName = fullName
+        result.dateOfCollection = dateOfCollection
+        result.dateOfRelease = dateOfRelease
+        result.output = output
+        const newResult = await result.save()
+        res.status(200).json({
+            message: 'Result successfully updated',
+            result: newResult
         })
     } catch (err) {
         console.log(err)
