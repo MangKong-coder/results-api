@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors')
 const dotenv = require('dotenv').config()
+const helmet = require('helmet')
 
 const resultRouter = require('./routes/result')
 
@@ -10,13 +11,8 @@ const app = express();
 app.use(express.json())
 
 app.use(cors());
-// app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
-//     res.setHeader('Access-Control-Allow-Headers', 'Content-type, Authorization');
-//     next();
 
-// })
+app.use(helmet())
 
 app.get('/', (req, res, next) => {
     res.send('<h1>This is an API used for Antigen and Antibody results</h1><p>Go to route /result/results to see all of the results</p> <footer> <small>&copy; Copyright 2021, James Domingo. All Rights Reserved</small> </footer>')
@@ -33,6 +29,6 @@ app.use((error, req, res, next) => {
 
 mongoose.connect(process.env.DB_URI)
 .then(result => {
-    app.listen(process.env.PORT);
+    app.listen(process.env.PORT || 5000);
 }).catch(err => console.log(err))
 
