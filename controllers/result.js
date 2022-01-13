@@ -4,8 +4,7 @@ exports.getResults = async (req, res, next) => {
     try {
         const results = await Result.find()
         res.status(200).json({
-            status: 'ok',
-            results: results,
+            result: results,
         })
     } catch (err) {
         console.log(err)
@@ -30,7 +29,6 @@ exports.postResult = async (req, res, next) => {
         })
         const newResult = await result.save()
         res.status(201).json({
-            status: "success",
             result: newResult
         })
     } catch (err) {
@@ -71,7 +69,6 @@ exports.updateResult = async (req, res, next) => {
         result.output = output
         const newResult = await result.save()
         res.status(200).json({
-            status: 'success',
             result: newResult
         })
     } catch (err) {
