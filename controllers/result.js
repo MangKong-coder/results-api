@@ -8,6 +8,7 @@ exports.getResults = async (req, res, next) => {
         })
     } catch (err) {
         console.log(err)
+        next(err)
     }
 }
 
@@ -33,6 +34,7 @@ exports.postResult = async (req, res, next) => {
         })
     } catch (err) {
         console.log(err)
+        next(err)
     }
 }
 
@@ -45,6 +47,7 @@ exports.getResult = async (req, res, next) => {
         })
     } catch (err) {
         console.log(err)
+        next(err)
     }
 }
 
@@ -59,7 +62,9 @@ exports.updateResult = async (req, res, next) => {
         const output = req.body.output
         const result  = await Result.findById(resultId)
         if (!result) {
-            throw new Error('Result not found')
+            res.status(404).json({
+                message: "Result cannot be found"
+            })
         }
         result.test = test
         result.accessionNumber = accessionNumber
@@ -73,6 +78,7 @@ exports.updateResult = async (req, res, next) => {
         })
     } catch (err) {
         console.log(err)
+        next(err)
     }
 }
 
