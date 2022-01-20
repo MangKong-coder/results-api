@@ -7,9 +7,9 @@ router.get('/results', resultController.getResults);
 
 router.post('/results', resultController.postResult);
 
-router.get('/results/:resultId', resultController.getResult);
+router.get('/results/:accessionNumber', resultController.getResult);
 
-router.put('/results/:resultId', resultController.updateResult);
+router.put('/results/:accessionNumber', resultController.updateResult);
 
 
 module.exports = router

@@ -40,8 +40,8 @@ exports.postResult = async (req, res, next) => {
 
 exports.getResult = async (req, res, next) => {
     try {
-        const resultId = req.params.resultId;
-        const result = await Result.findById(resultId);
+        const resultNumber = req.params.accessionNumber;
+        const result = await Result.find({accessionNumber: resultNumber});
         res.status(200).json({
             result: result
         })
@@ -52,7 +52,7 @@ exports.getResult = async (req, res, next) => {
 }
 
 exports.updateResult = async (req, res, next) => {
-    const resultId = req.params.resultId
+    const resultNumber = req.params.accessionNumber
     try {
         const test = req.body.test;
         const accessionNumber = req.body.accessionNumber;
@@ -60,7 +60,7 @@ exports.updateResult = async (req, res, next) => {
         const dateOfCollection = req.body.dateOfCollection;
         const dateOfRelease = req.body.dateOfRelease;
         const output = req.body.output
-        const result  = await Result.findById(resultId)
+        const result  = await Result.find({accessionNumber: resultNumber})
         if (!result) {
             res.status(404).json({
                 message: "Result cannot be found"
