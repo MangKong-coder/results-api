@@ -41,7 +41,7 @@ exports.postResult = async (req, res, next) => {
 exports.getResult = async (req, res, next) => {
     try {
         const resultNumber = req.params.accessionNumber;
-        const result = await Result.find({accessionNumber: resultNumber});
+        const result = await Result.findOne({accessionNumber: resultNumber});
         res.status(200).json({
             result: result
         })
@@ -60,7 +60,7 @@ exports.updateResult = async (req, res, next) => {
         const dateOfCollection = req.body.dateOfCollection;
         const dateOfRelease = req.body.dateOfRelease;
         const output = req.body.output
-        const result  = await Result.find({accessionNumber: resultNumber})
+        const result = await Result.findOne({accessionNumber: resultNumber})
         if (!result) {
             res.status(404).json({
                 message: "Result cannot be found"
@@ -72,7 +72,7 @@ exports.updateResult = async (req, res, next) => {
         result.dateOfCollection = dateOfCollection
         result.dateOfRelease = dateOfRelease
         result.output = output
-        const newResult = await result.save()
+        const newResult = await result.save();
         res.status(200).json({
             result: newResult
         })

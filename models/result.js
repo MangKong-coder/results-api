@@ -9,6 +9,7 @@ const resultSchema = new Schema({
     accessionNumber: {
         type: String,
         required: true,
+        unique: true
     },
     fullName: {
         type: String,
