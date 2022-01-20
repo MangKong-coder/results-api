@@ -11,5 +11,7 @@ router.get('/results/:accessionNumber', resultController.getResult);
 
 router.put('/results/:accessionNumber', resultController.updateResult);
 
+router.delete('/results/:resultId', resultController.deleteResult)
+
 
 module.exports = router

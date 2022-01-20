@@ -82,3 +82,16 @@ exports.updateResult = async (req, res, next) => {
     }
 }
 
+exports.deleteResult = async (req, res, next) => {
+    const resultId = req.params.resultId;
+    try {
+        await Result.findByIdAndDelete(resultId)
+        res.status(200).json({
+            message: 'Successfully Deleted'
+        })
+    } catch (err) {
+        console.log(err)
+        next(err)
+    }
+}
+
